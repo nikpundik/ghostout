@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj6jo8327ecvg"]
+
+[ext_resource type="Texture2D" uid="uid://bd53q2d8vxeed" path="res://assets/images/brick.png" id="1_1wm6d"]
+[ext_resource type="Script" path="res://scripts/ghost.gd" id="1_iaahk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ys8p"]
+size = Vector2(50, 20)
+
+[node name="Ghost" type="Node2D"]
+script = ExtResource("1_iaahk")
+
+[node name="Ghost" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite" type="Sprite2D" parent="Ghost"]
+texture = ExtResource("1_1wm6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
+shape = SubResource("RectangleShape2D_0ys8p")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Ghost"]
+
+[connection signal="screen_exited" from="Ghost/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

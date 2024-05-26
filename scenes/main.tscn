@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctum5r5igvo4d"]
+
+[ext_resource type="PackedScene" uid="uid://ct3nhb44mlfam" path="res://scenes/wall.tscn" id="1_53b7m"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_lkgdw"]
+[ext_resource type="Texture2D" uid="uid://dtrw3cw27j2ry" path="res://assets/images/wall_roof.png" id="2_1gq7l"]
+[ext_resource type="PackedScene" uid="uid://debj4mg8vkfdo" path="res://scenes/player.tscn" id="3_frslk"]
+[ext_resource type="PackedScene" uid="uid://byxgw8mrlmp3g" path="res://scenes/ball.tscn" id="4_g0ko0"]
+
+[sub_resource type="Environment" id="Environment_3ohwy"]
+background_mode = 1
+background_color = Color(0.282353, 0.815686, 0.764706, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yunep"]
+size = Vector2(1156, 4)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_lkgdw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3ohwy")
+
+[node name="WallLeft" parent="." instance=ExtResource("1_53b7m")]
+position = Vector2(-2, 0)
+
+[node name="WallRight" parent="." instance=ExtResource("1_53b7m")]
+position = Vector2(1154, 0)
+
+[node name="WallTop" type="Node2D" parent="."]
+position = Vector2(0, -2)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallTop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop/StaticBody2D"]
+position = Vector2(576, 0)
+shape = SubResource("RectangleShape2D_yunep")
+
+[node name="Sprite2D" type="Sprite2D" parent="WallTop/StaticBody2D"]
+position = Vector2(577, 0)
+scale = Vector2(1.60278, 0.2)
+texture = ExtResource("2_1gq7l")
+
+[node name="Player" parent="." instance=ExtResource("3_frslk")]
+position = Vector2(576, 600)
+
+[node name="Ball" parent="." instance=ExtResource("4_g0ko0")]
+position = Vector2(635, 348)
